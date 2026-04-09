@@ -408,17 +408,17 @@ a{text-decoration:none;transition:color .2s;}
       document.getElementById('dot-'+i).className = 'intro-dot' + (i === idx ? ' active' : '');
     });
 
-    // Swap text
+    // Swap text — remove vis (CSS handles opacity:0 transition), then set text & re-add
     phraseEl.classList.remove('vis', 'final');
-    phraseEl.style.opacity = '0';
-    phraseEl.style.transform = 'translateY(20px)';
+    phraseEl.style.opacity = '';
+    phraseEl.style.transform = '';
 
     setTimeout(function(){
       phraseEl.textContent = p.text;
       if (p.final) phraseEl.classList.add('final');
-      void phraseEl.offsetWidth; // reflow
+      void phraseEl.offsetWidth; // reflow so transition fires
       phraseEl.classList.add('vis');
-    }, 120);
+    }, 150);
 
     if (!isFinal) {
       phaseTimer = setTimeout(function(){
